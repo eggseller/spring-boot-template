@@ -12,6 +12,7 @@ configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
+	providedCompile
 }
 
 repositories {
@@ -23,6 +24,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
+	implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.4'
+	
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'org.postgresql:postgresql'
@@ -33,4 +36,15 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+for (config in configurations) {
+    println config
+    for (dependency in config.allDependencies) {
+        println dependency.name
+    }
 }
