@@ -14,4 +14,4 @@ spring:
 logging:
   pattern:
     console: "[%d{HH:mm:ss.SSS}][%-5level][%logger.%method:line%line] : %msg%n"
-    file: "[%d{HH:mm:ss.SSS}][%-5level][%logger.%method:line%line] - %msg%n"
+    file: "[%d{HH:mm:ss.SSS}][%-5level][%logger.%method:line%line] : %msg%n"
