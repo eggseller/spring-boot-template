@@ -1,11 +1,19 @@
 spring:
   application:
     name: kbstar-wallet-msa
+
   datasource:
-    driver-class-name: org.postgresql.Driver
-    url: "jdbc:postgresql://localhost:5432/postgres"
-    username: postgres
-    password: postgres
+    master:
+      driver-class-name: org.postgresql.Driver
+      jdbc-url: "jdbc:postgresql://localhost:5432/postgres"
+      username: postgres
+      password: postgres
+    second:
+      driver-class-name: org.mariadb.jdbc.Driver
+      jdbc-url: "jdbc:mysql://localhost/test?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&useSSL=true&serverTimezone=UTC&tinyInt1isBit=false"
+      username: eggseller
+      password: "387421"
+    
   security:
     user:
       name: admin
@@ -15,6 +23,15 @@ jasypt:
     bean: jasyptStringEncryptor      
 
 logging:
+  level:
+    root: info
+    com.bangahu.main: debug
   pattern:
     console: "[%d{HH:mm:ss.SSS}][%-5level][%logger.%method:line%line] : %msg%n"
     file: "[%d{HH:mm:ss.SSS}][%-5level][%logger.%method:line%line] : %msg%n"
+
+---
+properties:
+  message:
+    test: abc-123
+    
