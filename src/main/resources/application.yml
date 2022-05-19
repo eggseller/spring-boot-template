@@ -9,10 +9,14 @@ spring:
       username: postgres
       password: postgres
     second:
-      driver-class-name: org.mariadb.jdbc.Driver
-      jdbc-url: "jdbc:mysql://localhost/test?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&useSSL=true&serverTimezone=UTC&tinyInt1isBit=false"
-      username: eggseller
-      password: "387421"
+#      driver-class-name: org.mariadb.jdbc.Driver
+#      jdbc-url: "jdbc:mysql://localhost/test?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&useSSL=true&serverTimezone=UTC&tinyInt1isBit=false"
+#      username: eggseller
+#      password: "387421"
+      driver-class-name: org.postgresql.Driver
+      jdbc-url: "jdbc:postgresql://localhost:5432/second"
+      username: postgres
+      password: postgres
     
   security:
     user:
