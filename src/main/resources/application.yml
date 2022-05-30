@@ -17,7 +17,43 @@ spring:
       jdbc-url: "jdbc:postgresql://localhost:5432/second"
       username: postgres
       password: postgres
-    
+
+  jta:
+    atomikos:
+      datasource:
+        master:
+          unique-resource-name: master
+          xa-data-source-class-name: org.postgresql.xa.PGXADataSource
+          xa-properties:
+            serverName: localhost
+            portNumber: 5432
+            databaseName: postgres
+            user: postgres
+            password: postgres
+          #initQuery: select 1
+          testOnBorrow: true
+          validationQuery: select 1
+          defaultAutoCommit: false
+          max-pool-size: 10
+          min-pool-size: 3
+          reap-timeout: 60
+        second:
+          unique-resource-name: second
+          xa-data-source-class-name: com.mysql.cj.jdbc.MysqlXADataSource
+          xa-properties:
+            serverName: localhost
+            portNumber: 3306
+            databaseName: test
+            user: eggseller
+            password: 387421
+          #initQuery: select 1
+          testOnBorrow: true
+          validationQuery: select 1
+          defaultAutoCommit: false
+          max-pool-size: 10
+          min-pool-size: 3
+          reap-timeout: 60
+              
   security:
     user:
       name: admin
@@ -38,4 +74,11 @@ logging:
 properties:
   message:
     test: abc-123
+    error: noproblem
+    job:
+      title: dev
+      period: forever
+      tasks:
+        clean: room
+        wash: dish
     

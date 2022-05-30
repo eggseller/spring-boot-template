@@ -1,5 +1,6 @@
 package com.bangahu.main.common.config;
 
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -13,6 +14,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
 public class SqlSessionConfig {
@@ -35,12 +38,12 @@ public class SqlSessionConfig {
 	        return new SqlSessionTemplate(sqlSessinFactory);
 	    }
 	    
-	    @Bean(name="masterSqlSessionTransactionManager")
-	    public DataSourceTransactionManager masterSqlSessionTransactionManager(@Qualifier("masterDataSource") DataSource dataSource) {
-	    	DataSourceTransactionManager manager = new DataSourceTransactionManager();
-	    	manager.setDataSource(dataSource); 
-	    	return manager;
-	    }
+//	    @Bean(name="masterSqlSessionTransactionManager")
+//	    public DataSourceTransactionManager masterSqlSessionTransactionManager(@Qualifier("masterDataSource") DataSource dataSource) {
+//	    	DataSourceTransactionManager manager = new DataSourceTransactionManager();
+//	    	manager.setDataSource(dataSource); 
+//	    	return manager;
+//	    }
 	}
 	
 	@MapperScan(value = "com.bangahu.main.dao.second.sqlmapper", sqlSessionFactoryRef = "secondSqlSessionFactory")
@@ -61,11 +64,11 @@ public class SqlSessionConfig {
 	        return new SqlSessionTemplate(sqlSessinFactory);
 	    }
 	    
-	    @Bean(name="secondSqlSessionTransactionManager")
-	    public DataSourceTransactionManager masterSqlSessionTransactionManager(@Qualifier("secondDataSource") DataSource dataSource) {
-	    	DataSourceTransactionManager manager = new DataSourceTransactionManager();
-	    	manager.setDataSource(dataSource); 
-	    	return manager;
-	    }
+//	    @Bean(name="secondSqlSessionTransactionManager")
+//	    public DataSourceTransactionManager masterSqlSessionTransactionManager(@Qualifier("secondDataSource") DataSource dataSource) {
+//	    	DataSourceTransactionManager manager = new DataSourceTransactionManager();
+//	    	manager.setDataSource(dataSource); 
+//	    	return manager;
+//	    }
 	}
 }

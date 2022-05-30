@@ -1,5 +1,7 @@
 package com.bangahu.main.controller;
 
+import java.util.Map;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,9 +23,16 @@ public class TestController {
 	
 	@GetMapping("/react/user")
 	public ResponseEntity<?> reactGetUser(String username) {
-		Mono<User> monoUser = webClient.get().uri(builder -> builder.path("/user").queryParam("username", username).build())
-			//.exchangeToMono(response -> response.bodyToMono(User.class)).log();
+		Mono<?> monoUser = webClient.get().uri(builder -> builder.path("/user").queryParam("username", username).build())
+//			.retrieve()
+//			.onStatus(httpStatus -> httpStatus.value() != 200,
+//            	error -> Mono.error(new Exception("error Body"))
+//            )
+//			.bodyToMono(User.class)
 			.exchangeToMono(response -> {
+				if (!response.statusCode().is2xxSuccessful()) {
+					 return response.bodyToMono(Map.class);
+		        }
 				log.info("### response: {}-{}", response.statusCode(), response.bodyToMono(User.class));
 				return response.bodyToMono(User.class);
 			})
